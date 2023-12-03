@@ -89,8 +89,8 @@
             <a class="navbar-brand" href="#">
                 <img src="{{ asset('img/logo.png')}}" alt="WeatherSnap" width="170">
             </a>
-            <div class="bg-light rounded">
-                <h3 id="clock" class="fw-bold px-2 text-center pt-2"></h3>
+            <div class="bg-warning rounded">
+                <h3 id="clock" class="fw-bold px-2 text-center text-white pt-2"></h3>
             </div>
         </div>
     </nav>
@@ -103,8 +103,8 @@
             <p class="text-center text-white">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Nisi officiis quam modi accusantium dolores iste beatae numquam reiciendis ipsam aperiam, obcaecati nobis optio exercitationem itaque totam quisquam saepe in eaque.</p>
         </div>
 
-        <div class="get-weather d-flex align-items-center justify-content-center">
-            <form method="POST" action="{{ route('get-weather') }}" class="form-inline d-flex justify-content-center md-form form-sm active-cyan-2 mt-4">
+        <div class="get-weather align-items-center justify-content-center">
+            <form method="POST" action="{{ route('get-weather') }}" class="form-inline justify-content-center mt-5">
                 @csrf
                 <div class="form-group mr-2 mt-4">
                     <input type="text" name="city" class="form-control text-white bg-transparent border-warning" placeholder="Enter the location" required>
