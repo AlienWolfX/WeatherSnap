@@ -168,8 +168,7 @@
                     class="text-warning">S</span>nap</h1>
             <p class="text-center text-white">
                 WeatherSnap is a modern and user-friendly weather application that provides real-time weather
-                information at your fingertips. With a clean and intuitive interface, users can effortlessly check the
-                current temperature, humidity, wind speed, and detailed weather conditions for any city!</p>
+                information at your fingertips.</p>
         </div>
 
         <div class="get-weather align-items-center justify-content-center">
@@ -192,7 +191,7 @@
                 <div class="weather__card">
                     <div class="d-flex flex-row justify-content-center align-items-center">
                         <div class="p-3">
-                            <h2>{{ $data['main']['temp'] }}&deg;C</h2>
+                            <h2>{{ $data['main']['temp'] }}&deg;</h2>
                         </div>
                         <div class="p-3">
                             @if (isset($data['weather'][0]['icon']))
