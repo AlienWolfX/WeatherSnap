@@ -16,15 +16,80 @@
         body {
             height: 100vh;
             font-family: 'Poppins', sans-serif;
-            background-image: url('{{asset('img/background-image.jpg') }}');
+            background-image: url('{{ asset('img/background-image.jpg') }}');
             /* Remove the space after 'asset(' */
             background-size: cover;
             background-position: center;
         }
 
         .form-control::placeholder {
-        color: white; /* Warning color, adjust as needed */
-    }
+            color: white;
+            /* Warning color, adjust as needed */
+        }
+
+        /*--------------------------------------------------------------
+        # Weather Card
+        --------------------------------------------------------------*/
+        .weather__card {
+            width: 800px;
+            padding: 40px 30px;
+            background-color: #ad9a61;
+            border-radius: 20px;
+            color: #3C4048;
+        }
+
+        .weather__card h2 {
+            font-size: 90px;
+            font-weight: 700;
+            color: #3C4048;
+            line-height: .8;
+        }
+
+        .weather__card h3 {
+            font-size: 40px;
+            font-weight: 600;
+            line-height: .8;
+            color: #3C4048;
+        }
+
+        .weather__card h5 {
+            font-size: 20px;
+            font-weight: 400;
+            line-height: .1;
+            color: #9D9D9D;
+        }
+
+        .weather__card img {
+            width: 120px;
+            height: 120px;
+        }
+
+        .weather__card .weather__description {
+            background-color: #fff;
+            border-radius: 25px;
+            padding: 5px 13px;
+            border: 0;
+            outline: none;
+            color: #7F8487;
+            font-size: .956rem;
+            font-weight: 400;
+        }
+
+        /*--------------------------------------------------------------
+        # Weather Status
+        --------------------------------------------------------------*/
+        .weather__status img {
+            height: 20px;
+            width: 20px;
+            vertical-align: middle;
+        }
+
+        .weather__status span {
+            font-weight: 500;
+            color: #3C4048;
+            font-size: .9rem;
+            padding-left: .5rem;
+        }
 
         /* .container {
             text-align: center;
@@ -87,7 +152,7 @@
     <nav class="navbar bg-body-tertiary">
         <div class="container">
             <a class="navbar-brand" href="#">
-                <img src="{{ asset('img/logo.png')}}" alt="WeatherSnap" width="170">
+                <img src="{{ asset('img/logo.png') }}" alt="WeatherSnap" width="170">
             </a>
             <div class="bg-warning rounded">
                 <h3 id="clock" class="fw-bold px-2 text-center text-white pt-2"></h3>
@@ -99,36 +164,66 @@
     <!--main content-->
     <div class="container mt-5">
         <div class="app-name pt-5">
-            <h1 class="text-center text-white fw-bold pt-5"><span class="text-warning">W</span>eather<span class="text-warning">S</span>nap</h1>
-            <p class="text-center text-white">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Nisi officiis quam modi accusantium dolores iste beatae numquam reiciendis ipsam aperiam, obcaecati nobis optio exercitationem itaque totam quisquam saepe in eaque.</p>
+            <h1 class="text-center text-white fw-bold pt-5"><span class="text-warning">W</span>eather<span
+                    class="text-warning">S</span>nap</h1>
+            <p class="text-center text-white">
+                WeatherSnap is a modern and user-friendly weather application that provides real-time weather
+                information at your fingertips. With a clean and intuitive interface, users can effortlessly check the
+                current temperature, humidity, wind speed, and detailed weather conditions for any city!</p>
         </div>
 
         <div class="get-weather align-items-center justify-content-center">
             <form method="POST" action="{{ route('get-weather') }}" class="form-inline justify-content-center mt-5">
                 @csrf
                 <div class="form-group mr-2 mt-4">
-                    <input type="text" name="city" class="form-control text-white bg-transparent border-warning" placeholder="Enter the location" required>
+                    <input type="text" name="city" class="form-control text-white bg-transparent border-warning"
+                        placeholder="Enter the location" required>
                 </div>
-                <button type="submit" class="btn btn-warning mt-4"><i class="fas fa-search weather-icon text-white"></i></button>
+                <button type="submit" class="btn btn-warning mt-4"><i
+                        class="fas fa-search weather-icon text-white"></i></button>
             </form>
         </div>
 
         @isset($data)
-        <div class="weather-info">
-            @if(isset($data['main']))
-            <h2><i class="fas fa-cloud-sun weather-icon"></i> Weather in {{ $data['name'] }}, {{ $data['sys']['country'] }}</h2>
-            <p><i class="fas fa-thermometer-half weather-icon"></i> Temperature: {{ $data['main']['temp'] }}&deg;C</p>
-            <p><i class="fas fa-tint weather-icon"></i> Humidity: {{ $data['main']['humidity'] }}%</p>
-            <p><i class="fas fa-wind weather-icon"></i> Wind Speed: {{ $data['wind']['speed'] }} m/s</p>
-            <p><i class="fas fa-cloud weather-icon"></i> Weather: {{ $data['weather'][0]['description'] }}</p>
-            @if(strtolower($data['weather'][0]['main']) == 'haze')
-            <p class="text-warning"><i class="fas fa-exclamation-triangle weather-icon"></i> Haze Alert!</p>
-            @endif
-            @else
-            <p class="error-message">No data found for the specified city.</p>
-            @endif
+        <!-- Weather -->
+        <div class="container mt-5">
+            <div class="d-flex flex-row justify-content-center align-items-center">
+                @if (isset($data['main']))
+                <div class="weather__card">
+                    <div class="d-flex flex-row justify-content-center align-items-center">
+                        <div class="p-3">
+                            <h2>{{ $data['main']['temp'] }}&deg;C</h2>
+                        </div>
+                        <div class="p-3">
+                            @if (isset($data['weather'][0]['icon']))
+                                <img src="https://openweathermap.org/img/wn/{{ $data['weather'][0]['icon'] }}@2x.png"
+                            alt="Weather Icon">
+                            @endif
+                        </div>
+                        <div class="p-3">
+                            <h3>{{ $data['name'] }},
+                                {{ $data['sys']['country'] }}</h3>
+                            <span class="weather__description">{{ $data['weather'][0]['description'] }}</span>
+                        </div>
+                    </div>
+                    <div class="weather__status d-flex flex-row justify-content-center align-items-center mt-3">
+                        <div class="p-4 d-flex justify-content-center align-items-center">
+                            <img src="https://svgur.com/i/oHw.svg">
+                            <span>{{ $data['main']['humidity'] }}%</span>
+                        </div>
+                        <div class="p-4 d-flex justify-content-center align-items-center">
+                            <img src="https://svgur.com/i/oKS.svg">
+                            <span>{{ $data['wind']['speed'] }} m/s</span>
+                        </div>
+                    </div>
+                </div>
+                @else
+                    <p class="error-message">No data found for the specified city.</p>
+                @endif
+            </div>
         </div>
         @endisset
+
     </div>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
@@ -161,3 +256,4 @@
 </body>
 
 </html>
+
