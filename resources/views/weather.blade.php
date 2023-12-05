@@ -183,7 +183,7 @@
             </form>
         </div>
 
-        @isset($data)
+        {{-- @isset($data)
         <!-- Weather -->
         <div class="container mt-5">
             <div class="d-flex flex-row justify-content-center align-items-center">
@@ -221,7 +221,39 @@
                 @endif
             </div>
         </div>
-        @endisset
+        @endisset --}}
+
+        @if (isset($data['weather'][0]['description']))
+                <!--this is for dynamically change the icon base on its description-->
+                <?php
+                    $iconMappings = [
+                    'clear sky' => '01',
+                    'few clouds' => '02',
+                    'scattered clouds' => '03',
+                    'broken clouds' => '04',
+                    'shower rain' => '09',
+                    'rain' => '10',
+                    'thunderstorm' => '11',
+                    'snow' => '13',
+                    'mist' => '50'
+                    ];
+
+                    // <!--lowercase the description-->
+                    $lowercaseDescription = strtolower($data['weather'][0]['description']);
+
+                    // <!--check the time, 5AM to 5PM is considered day-->
+                    $isDay = date('H') >= 5 && date('H') < 17;
+
+                    // <!--Construct the icon code with the appropriate suffix ('d' for day, 'n' for night)-->
+                    $iconCode = $iconMappings[$lowercaseDescription] ?? null;
+                    $iconCode .=$isDay ? 'd' : 'n' ;
+
+                ?>
+            @endif
+                <!-- Display the icon if a mapping exists -->
+                @if (isset($iconCode))
+                    <img src="https://openweathermap.org/img/wn/{{ $iconCode }}@2x.png" alt='Weather Icon' width='35%'>
+                @endif
 
     </div>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
