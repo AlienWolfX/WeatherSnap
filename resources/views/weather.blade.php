@@ -113,23 +113,6 @@
                 <button type="submit" class="btn btn-warning mt-4"><i class="fas fa-search weather-icon text-white"></i></button>
             </form>
         </div>
-
-        @isset($data)
-        <div class="weather-info">
-            @if(isset($data['main']))
-            <h2><i class="fas fa-cloud-sun weather-icon text-white"></i> Weather in {{ $data['name'] }}, {{ $data['sys']['country'] }}</h2>
-            <p><i class="fas fa-thermometer-half weather-icon"></i> Temperature: {{ $data['main']['temp'] }}&deg;C</p>
-            <p><i class="fas fa-tint weather-icon"></i> Humidity: {{ $data['main']['humidity'] }}%</p>
-            <p><i class="fas fa-wind weather-icon"></i> Wind Speed: {{ $data['wind']['speed'] }} m/s</p>
-            <p><i class="fas fa-cloud weather-icon"></i> Weather: {{ $data['weather'][0]['description'] }}</p>
-            @if(strtolower($data['weather'][0]['main']) == 'haze')
-            <p class="text-warning"><i class="fas fa-exclamation-triangle weather-icon"></i> Haze Alert!</p>
-            @endif
-            @else
-            <p class="error-message">No data found for the specified city.</p>
-            @endif
-        </div>
-        @endisset
     </div>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>

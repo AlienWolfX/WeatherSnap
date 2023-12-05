@@ -55,11 +55,11 @@
     <!--end of navbar-->
 
     <!--search bar-->
-    <div class="get-weather align-items-center justify-content-center">
+    <div class="get-weather align-items-center justify-content-center mt-5">
         <form method="POST" action="{{ route('get-weather') }}" class="form-inline justify-content-center" autocomplete="off">
             @csrf
             <div class="form-group mr-2 mt-4">
-                <input type="text" name="city" class="form-control text-white bg-transparent border-warning" value="{{ $city }}" required>
+                <input type="text" name="city" class="form-control text-white bg-transparent border-warning" value="{{ $city }}" placeholder="Enter the city" required>
             </div>
             <button type="submit" class="btn btn-warning mt-4"><i class="fas fa-search weather-icon text-white"></i></button>
         </form>
@@ -68,48 +68,41 @@
 
     @isset($data)
     <div class="row mx-auto container info-container mt-5">
-        <div class="col-6 px-5 text-center">
         @if (isset($data['main']))
-                <!--this is for dynamically change the icon base on its description-->
-                <?php
-                    $iconMappings = [
-                    'clear sky' => '01',
-                    'few clouds' => '02',
-                    'scattered clouds' => '03',
-                    'broken clouds' => '04',
-                    'shower rain' => '09',
-                    'rain' => '10',
-                    'thunderstorm' => '11',
-                    'snow' => '13',
-                    'mist' => '50'
-                    ];
-
-                    // <!--lowercase the description-->
-                    $lowercaseDescription = strtolower($data['weather'][0]['description']);
-
-                    // <!--check the time, 5AM to 5PM is considered day-->
-                    // Check the time, 5AM to 5PM is considered day in 12-hour format
-                    $isDay = date('h') >= 5 && date('h') < 17;
-                    
-                    // <!--Construct the icon code with the appropriate suffix ('d' for day, 'n' for night)-->
-                    $iconCode = $iconMappings[$lowercaseDescription] ?? null; 
-                    $iconCode .=$isDay ? 'd' : 'n' ; 
-                    
-                ?>
-                <!-- Display the icon if a mapping exists -->
-                @if (isset($iconCode))
-                    <img src="https://openweathermap.org/img/wn/{{ $iconCode }}@2x.png" alt='Weather Icon' width='35%'>
-                @endif
-
-
-                
-            
-                <h1 class="text-white">{{ $data['main']['temp'] }} &deg;C</h1>
-                <h2 class="text-white">{{ $data['weather'][0]['description'] }}</h2>
-                <hr class="color-line w-75" />
-        @endif
+        <div class="col text-center">
+            @if (isset($data['weather'][0]['icon']))
+            <img src="https://openweathermap.org/img/wn/{{ $data['weather'][0]['icon'] }}@2x.png" alt="Weather Icon">
+            @endif
+            <h1 class="text-white">{{ $data['main']['temp'] }} &deg;C</h1>
+            <h2 class="text-white">{{ $data['weather'][0]['description'] }}</h2>
+            <hr class="color-line w-75" />
+            <h2 class="text-white pt-4 pb-4">{{ $data['name'] }}, {{ $data['sys']['country'] }}</h2>
         </div>
-        <div class="col-6"></div>
+        <div class="col d-flex align-items-center justify-content-center">
+            <div class="row text-white text-center">
+                <div class="col mx-3 mt-2 w-50">
+                    <img src="{{ asset('img/humidity_icon.png')}}" alt="" class="w-75">
+                    <p>Humidity</p>
+                    <h3 class="pt-3">{{ $data['main']['humidity'] }}%</h3>
+
+                </div>
+                <div class="col mx-3 px-2 mt-2 w-50">
+                    <img src="{{ asset('img/air_pressure_icon.png')}}" alt="" class="w-75">
+                    <p>Air Pressure</p>
+                    <h3 class="pt-3">{{ $data['main']['pressure'] }} hPa</h3>
+                </div>
+                <div class="col mx-3 px-2 mt-2">
+                    <img src="{{ asset('img/wind_speed_icon.png')}}" alt="" class="w-75">
+                    <p>Wind Speed</p>
+                    <h3 class="pt-3">{{ $data['wind']['speed'] }} m/s</h3>
+                </div>
+            </div>
+        </div>
+        @else
+        <div class="col text-center text-white">
+            <p>{{ $errorMessage ?? 'City not found' }}</p>
+        </div>
+        @endif
     </div>
     @endisset
 
