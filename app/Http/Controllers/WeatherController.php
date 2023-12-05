@@ -31,6 +31,7 @@ class WeatherController extends Controller
             } else {
                 // Pass the error message to the view
                 $errorMessage = 'City not found';
+                dd($errorMessage);
                 return view('info', compact('errorMessage', 'city'));
             }
         } catch (\Exception $e) {

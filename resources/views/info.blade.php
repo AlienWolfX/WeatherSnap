@@ -65,6 +65,14 @@
         </form>
     </div>
     <!--end of search bar-->
+    @isset($errorMessage)
+    <div class="row mx-auto container info-container mt-5">
+        <div class="col text-center text-white">
+            <img src="{{ asset('img/not_found_icon.png')}}" alt="" class="w-25">
+            <h2 class="pb-3">City not found</h2>
+        </div>
+    </div>
+    @endisset
 
     @isset($data)
     <div class="row mx-auto container info-container mt-5">
@@ -97,10 +105,6 @@
                     <h3 class="pt-3">{{ $data['wind']['speed'] }} m/s</h3>
                 </div>
             </div>
-        </div>
-        @else
-        <div class="col text-center text-white">
-            <p>{{ $errorMessage ?? 'City not found' }}</p>
         </div>
         @endif
     </div>
