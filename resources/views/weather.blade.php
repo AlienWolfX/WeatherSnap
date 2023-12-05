@@ -101,7 +101,7 @@
     <div class="container mt-5">
         <div class="app-name pt-5">
             <h1 class="text-center text-white fw-bold pt-5"><span class="text-warning">W</span>eather<span class="text-warning">S</span>nap</h1>
-            <p class="text-center text-white">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Nisi officiis quam modi accusantium dolores iste beatae numquam reiciendis ipsam aperiam, obcaecati nobis optio exercitationem itaque totam quisquam saepe in eaque.</p>
+            <p class="text-center text-white"> WeatherSnap is a modern and user-friendly weather application that provides real-time weather information at your fingertips.</p>
         </div>
 
         <div class="get-weather align-items-center justify-content-center">
