@@ -58,11 +58,15 @@
         </div>
         <!--end of search bar-->
        
+        @isset($data)
         <div class="container info-container mt-5">
             <div class="container">
-                <h1 class="text-white">How</h1>
+            @if(isset($data['main']))
+                <h1 class="text-white">{{ $data['name'] }}, {{ $data['sys']['country'] }}</h1>
             </div>
+            @endif
         </div>
+        @endisset
 
     <!--javascripts-->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
