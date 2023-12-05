@@ -23,6 +23,6 @@ class WeatherController extends Controller
         $response = $client->request('GET', $url);
         $data = json_decode($response->getBody(), true);
 
-        return view('info', ['data']);
+        return view('info', ['data'], compact('city'));
     }
 }

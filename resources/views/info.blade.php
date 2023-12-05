@@ -26,6 +26,10 @@
         .form-control::placeholder {
         color: white; /* Warning color, adjust as needed */
     }
+        .info-container{
+            background-color: rgba(255, 193, 7, 0.5);
+            border-radius: 15px;
+        }
     </style>
 </head>
 <body>
@@ -47,28 +51,18 @@
             <form method="POST" action="{{ route('get-weather') }}" class="form-inline justify-content-center" autocomplete="off">
                 @csrf
                 <div class="form-group mr-2 mt-4">
-                    <input type="text" name="city" class="form-control text-white bg-transparent border-warning" required>
+                    <input type="text" name="city" class="form-control text-white bg-transparent border-warning" value="{{ $city }}" required>
                 </div>
                 <button type="submit" class="btn btn-warning mt-4"><i class="fas fa-search weather-icon text-white"></i></button>
             </form>
         </div>
         <!--end of search bar-->
-        @isset($data)
-        <div class="weather-info">
-            @if(isset($data['main']))
-            <h2><i class="fas fa-cloud-sun weather-icon"></i> Weather in {{ $data['name'] }}, {{ $data['sys']['country'] }}</h2>
-            <p><i class="fas fa-thermometer-half weather-icon"></i> Temperature: {{ $data['main']['temp'] }}&deg;C</p>
-            <p><i class="fas fa-tint weather-icon"></i> Humidity: {{ $data['main']['humidity'] }}%</p>
-            <p><i class="fas fa-wind weather-icon"></i> Wind Speed: {{ $data['wind']['speed'] }} m/s</p>
-            <p><i class="fas fa-cloud weather-icon"></i> Weather: {{ $data['weather'][0]['description'] }}</p>
-            @if(strtolower($data['weather'][0]['main']) == 'haze')
-            <p class="text-warning"><i class="fas fa-exclamation-triangle weather-icon"></i> Haze Alert!</p>
-            @endif
-            @else
-            <p class="error-message">No data found for the specified city.</p>
-            @endif
+       
+        <div class="container info-container mt-5">
+            <div class="container">
+                <h1 class="text-white">How</h1>
+            </div>
         </div>
-        @endisset
 
     <!--javascripts-->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
