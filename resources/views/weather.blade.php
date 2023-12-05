@@ -183,7 +183,7 @@
             </form>
         </div>
 
-        {{-- @isset($data)
+        @isset($data)
         <!-- Weather -->
         <div class="container mt-5">
             <div class="d-flex flex-row justify-content-center align-items-center">
@@ -221,7 +221,7 @@
                 @endif
             </div>
         </div>
-        @endisset --}}
+        @endisset
 
         @if (isset($data['weather'][0]['description']))
                 <!--this is for dynamically change the icon base on its description-->
