@@ -1,0 +1,32 @@
+Download and Install Required Software:
+
+Ensure that PHP and Composer are installed on your machine. Download PHP from https://www.php.net/downloads.php, and Composer from https://getcomposer.org/download/.\
+Ensure that you also have Visual Studio Code
+
+Extract the WeatherSnap.zip File:
+Download and unzip the WeatherSnap.zip file to a directory of your choice.
+
+Navigate to the WeatherSnap Folder:
+Open a terminal or command prompt and run the following commands to view the source code.
+
+code .
+
+Install Dependencies:
+Run the following command to install Laravel dependencies.
+
+composer install
+
+Create Environment File:
+Duplicate the .env.example file and rename it to .env.
+
+Generate Application Key:
+Run the following command to generate a unique application key.
+
+php artisan key:generate
+
+Serve the Application:
+Start the Laravel development server.
+
+php artisan serve
+
+Open your web browser and visit http://localhost:8000 to view the WeatherSnap application.

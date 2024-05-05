@@ -13,6 +13,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
 
+    <link rel="icon" href="https://i.ibb.co/SfnpSGZ/weather-app.png" type="image/png">
+
     <!--styles-->
     <style>
         body {
@@ -30,7 +32,7 @@
         }
 
         .info-container {
-            background-color: rgba(255, 193, 7, 0.5);
+            /* background-color: rgba(255, 193, 7, 0.5); */
             border-radius: 15px;
         }
 
@@ -47,7 +49,7 @@
             <a class="navbar-brand" href="{{ route('/') }}">
                 <img src="{{ asset('img/logo.png')}}" alt="WeatherSnap" width="170">
             </a>
-            <div class="bg-warning rounded">
+            <div> <!-- removed ang class=bg-warning rounded -->
                 <h3 id="clock" class="fw-bold px-2 text-center text-white pt-2"></h3>
             </div>
         </div>
@@ -139,6 +141,15 @@
         // Initial update
         updateClock();
     </script>
+    <footer style="position: fixed; left: 0; bottom: 0; width: 100%; color: white; text-align: center; padding: 10px 0;">
+        <p>Created with ❤️ by <a target="_blank" href="https://github.com/AlienWolfX" style="color: #ffc107; text-decoration: none;">Allen Cruiz</a> and <a target="_blank" href="https://github.com/Cyrelcab" style="color: #ffc107; text-decoration: none;">Cyrel Cabodbod</a></p>
+    </footer>
+
+    <style>
+        a:hover {
+        text-decoration: none;
+    }
+    </style>
 </body>
 
 </html>
