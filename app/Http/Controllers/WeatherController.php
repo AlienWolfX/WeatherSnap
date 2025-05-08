@@ -16,7 +16,11 @@ class WeatherController extends Controller
     {
         $city = $request->input('city');
 
-        $apiKey = '58e50900422ca0c04fab2e579e29cbb6';
+        $apiKey = env('OPENWEATHERMAP_API_KEY');
+        if (!$apiKey) {
+            $errorMessage = 'API key not found. Please set it in your .env file.';
+            return view('info', compact('errorMessage', 'city'));
+        }
         $url = "http://api.openweathermap.org/data/2.5/weather?q=$city&appid=$apiKey&units=metric";
 
         $client = new Client();
